@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oferta Especial</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f9f9f9;
+      padding: 40px;
+      color: #333;
+      margin: 0;
+    }
+    h1 {
+      color: #d90429;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    .timer {
+      font-size: 48px;
+      font-weight: bold;
+      color: #ef233c;
+      margin: 20px 0;
+      background: rgba(239, 35, 60, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      min-width: 200px;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #2b9348;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      font-size: 20px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+    .cta-button:hover {
+      background-color: #238636;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .warning {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #ff6600;
+      font-weight: bold;
+    }
+    .description {
+      font-size: 20px;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .expired {
+      color: #888;
+      font-style: italic;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin: 20px;
+      }
+      .timer {
+        font-size: 36px;
+      }
+      h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔥 Sua Oferta Exclusiva Está Pronta!</h1>
+    <p class="description">Você tem apenas <strong>3 minutos</strong> para garantir o valor promocional antes que expire.</p>
+    <div class="timer" id="countdown">03:00</div>
+    <br>
+    <a class="cta-button" href="https://checkout.amplopay.com/checkout/cmbs726al01dgf5nkbogydur5?offer=9NW8UY6" target="_blank" id="cta-link">
+      Aproveitar Agora
+    </a>
+    <p class="warning">⚠️ Após o tempo acabar, o desconto pode ser removido.</p>
+  </div>
+
+  <script>
+    let timeLeft = 180; // 3 minutos
+    const countdownElement = document.getElementById("countdown");
+    const ctaLink = document.getElementById("cta-link");
+    
+    const timer = setInterval(() => {
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      countdownElement.textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      timeLeft--;
+      
+      if (timeLeft < 0) {
+        clearInterval(timer);
+        countdownElement.textContent = "00:00";
+        countdownElement.classList.add("expired");
+        ctaLink.style.opacity = "0.5";
+        ctaLink.style.pointerEvents = "none";
+        alert("Seu tempo acabou! A oferta pode não estar mais disponível.");
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
